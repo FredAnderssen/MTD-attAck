@@ -1,17 +1,22 @@
 package sample;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Rectangle2D;
 
 public class Board extends JPanel {
+    private Image starland;
 
-    public Board() {};
+    public Board() {
+        initBoard();
+    };
 
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 
         drawSquare(graphics);
+        graphics.drawImage(starland, 0, 0, null);
+
     }
 
     public void drawSquare(Graphics graphics) {
@@ -34,6 +39,16 @@ public class Board extends JPanel {
     private void initGraphics2D(Graphics2D graphics2D) {
         graphics2D.setStroke(new BasicStroke(1));
         graphics2D.setColor(new Color(6, 183, 155));
+    }
+
+    private void initBoard() {
+        loadStarlandImage();
+
+    }
+
+    private void loadStarlandImage() {
+        ImageIcon imageIcon = new ImageIcon("src/resources/starland.jpeg");
+        starland = imageIcon.getImage();
     }
 
 
