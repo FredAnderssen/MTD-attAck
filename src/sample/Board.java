@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Board extends JPanel {
 
+    //TODO temporarily added
     public Board() {};
 
     public void paintComponent(Graphics g) {
