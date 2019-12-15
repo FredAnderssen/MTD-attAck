@@ -12,11 +12,23 @@ public class Board extends JPanel implements Runnable{
     private final int DELAY = 25;
     private Thread _animator;
 
+    private Spaceship spaceship;
     private Image body;
     private int _x, _y;
 
     public Board() {
         initBoard();
+    };
+
+    private void initBoard(){
+        setBackground(Color.BLACK);
+        setSize(BOARD_WIDTH, BOARD_HEIGHT);
+
+        spaceship = new Spaceship();
+
+        loadImage();
+        _x = INIT_X;
+        _y = INIT_Y;
     };
 
     @Override
@@ -29,6 +41,7 @@ public class Board extends JPanel implements Runnable{
 
     private void paintBody(Graphics graphics){
         graphics.drawImage(body, _x, _y, this);
+        graphics.drawImage(spaceship.getImage(), 100, 100, this);
         Toolkit.getDefaultToolkit().sync();
     }
 
@@ -36,15 +49,6 @@ public class Board extends JPanel implements Runnable{
         ImageIcon imageIcon = new ImageIcon("src/resources/starland.jpeg");
         body = imageIcon.getImage();
     }
-
-    private void initBoard(){
-        setBackground(Color.BLACK);
-        setSize(BOARD_WIDTH, BOARD_HEIGHT);
-
-        loadImage();
-        _x = INIT_X;
-        _y = INIT_Y;
-    };
 
     @Override
     public void addNotify() {
