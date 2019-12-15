@@ -11,7 +11,7 @@ public class Application extends JFrame {
 
     private void initUI() {
         add(new Board());
-        setSize(450, 400);
+        setSize(400, 400);
         setTitle("aTack Tower Defense");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);

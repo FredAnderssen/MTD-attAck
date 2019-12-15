@@ -5,10 +5,10 @@ import java.awt.*;
 
 
 public class Board extends JPanel implements Runnable{
-    private final int BOARD_WIDTH = 350;
-    private final int BOARD_HEIGHT = 350;
-    private final int INIT_X = -40;
-    private final int INIT_Y = -40;
+    private final int BOARD_WIDTH = 400;
+    private final int BOARD_HEIGHT = 400;
+    private final int INIT_X = 200;
+    private final int INIT_Y = 0;
     private final int DELAY = 25;
     private Thread _animator;
 
@@ -40,7 +40,6 @@ public class Board extends JPanel implements Runnable{
     private void initBoard(){
         setBackground(Color.BLACK);
         setSize(BOARD_WIDTH, BOARD_HEIGHT);
-        //setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
         loadImage();
         _x = INIT_X;
@@ -55,12 +54,25 @@ public class Board extends JPanel implements Runnable{
     }
 
     private void cycle(){
-        _x += 1;
-        _y += 1;
-
-        if(_y > BOARD_HEIGHT){
-            _x = INIT_X;
-            _y = INIT_Y;
+        //quad1
+        if(_x >= 200 && _y >= 0 && _y <= 200 ) {
+            _x += 1;
+            _y += 1;
+        }
+        //quad2
+        if(_y >= 200 && _x >= 200 && _y <= 400){
+            _x -= 1;
+            _y += 1;
+        }
+        //quad3
+        if(_x <= 200 && _y <= 400 && _y >= 200){
+            _x -= 1;
+            _y -= 1;
+        }
+        //quad4
+        if(_y <= 200 && _x <= 200) {
+            _x += 1;
+            _y -= 1;
         }
     }
 
