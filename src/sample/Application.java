@@ -5,13 +5,6 @@ import java.awt.EventQueue;
 
 public class Application extends JFrame {
 
-    public static void main(String[] args) {
-        EventQueue.invokeLater(() -> {
-            Application aTack = new Application();
-            aTack.setVisible(true);
-        });
-    }
-
     public Application() {
         initUI();
     }
@@ -24,5 +17,14 @@ public class Application extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
     }
+
+    public static void main(String[] args) {
+        EventQueue.invokeLater(() -> {
+            Application aTack = new Application();
+            aTack.setVisible(true);
+        });
+    }
+
+
 
 }

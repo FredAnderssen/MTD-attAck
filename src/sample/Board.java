@@ -2,54 +2,102 @@ package sample;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.Rectangle2D;
 
-public class Board extends JPanel {
-    private Image starland;
+
+public class Board extends JPanel implements Runnable{
+    private final int BOARD_WIDTH = 350;
+    private final int BOARD_HEIGHT = 350;
+    private final int INIT_X = -40;
+    private final int INIT_Y = -40;
+    private final int DELAY = 25;
+    private Thread _animator;
+
+    private Image body;
+    private int _x, _y;
 
     public Board() {
         initBoard();
     };
 
+    @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
 
-        drawSquare(graphics);
-        graphics.drawImage(starland, 0, 0, null);
+        paintBody(graphics);
 
+    };
+
+    private void paintBody(Graphics graphics){
+        graphics.drawImage(body, _x, _y, this);
+        Toolkit.getDefaultToolkit().sync();
     }
 
-    public void drawSquare(Graphics graphics) {
-        Graphics2D graphics2D = (Graphics2D) graphics;
-
-        RenderingHints renderinghints = new RenderingHints(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-        renderinghints.put(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-        graphics2D.setRenderingHints(renderinghints);
-
-        Dimension size = getSize();
-        double width = size.getWidth();
-        double height = size.getHeight();
-
-        Rectangle2D rectangle2D = new Rectangle2D.Double(0,0, width, height);
-        initGraphics2D(graphics2D);
-        graphics2D.fill(rectangle2D);
-        graphics2D.draw(rectangle2D);
-    }
-
-    private void initGraphics2D(Graphics2D graphics2D) {
-        graphics2D.setStroke(new BasicStroke(1));
-        graphics2D.setColor(new Color(6, 183, 155));
-    }
-
-    private void initBoard() {
-        loadStarlandImage();
-
-    }
-
-    private void loadStarlandImage() {
+    private void loadImage(){
         ImageIcon imageIcon = new ImageIcon("src/resources/starland.jpeg");
-        starland = imageIcon.getImage();
+        body = imageIcon.getImage();
     }
+
+    private void initBoard(){
+        setBackground(Color.BLACK);
+        setSize(BOARD_WIDTH, BOARD_HEIGHT);
+        //setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+
+        loadImage();
+        _x = INIT_X;
+        _y = INIT_Y;
+    };
+
+    @Override
+    public void addNotify() {
+        super.addNotify();
+        _animator = new Thread(this);
+        _animator.start();
+    }
+
+    private void cycle(){
+        _x += 1;
+        _y += 1;
+
+        if(_y > BOARD_HEIGHT){
+            _x = INIT_X;
+            _y = INIT_Y;
+        }
+    }
+
+    @Override
+    public void run() {
+        long beforeTime, timeDifference, sleep;
+
+        beforeTime = System.currentTimeMillis();
+        while(true) {
+
+            cycle();
+            repaint();
+
+            timeDifference = System.currentTimeMillis() - beforeTime;
+            sleep = DELAY - timeDifference;
+
+            if(sleep < 0){
+                sleep = 2;
+            }
+
+            try {
+                Thread.sleep(sleep);
+            } catch (InterruptedException exception){
+                String msg = String.format("Thread interrupted: %s", exception.getMessage());
+
+                JOptionPane.showMessageDialog(this, msg, "Error",
+                        JOptionPane.ERROR_MESSAGE);
+            }
+            beforeTime = System.currentTimeMillis();
+        }
+
+
+    }
+
+
+
+
 
 
 
