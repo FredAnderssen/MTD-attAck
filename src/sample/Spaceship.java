@@ -23,6 +23,7 @@ class Spaceship implements Player {
         ImageIcon imageIcon = new ImageIcon("src/resources/xwing.png");
         var tempImage = imageIcon.getImage();
         image = tempImage.getScaledInstance(70, 70, Image.SCALE_SMOOTH);
+
     }
 
     public void move() {

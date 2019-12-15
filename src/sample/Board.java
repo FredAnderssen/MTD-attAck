@@ -60,25 +60,27 @@ public class Board extends JPanel implements Runnable {
     }
 
     private void cycle(){
+        int xSpeed = 2;
+        int ySpeed = 2;
         //quad1
         if(_x >= 200 && _y >= 0 && _y <= 200 ) {
-            _x += 1;
-            _y += 1;
+            _x += xSpeed;
+            _y += ySpeed;
         }
         //quad2
         if(_y >= 200 && _x >= 200 && _y <= 400){
-            _x -= 1;
-            _y += 1;
+            _x -= xSpeed;
+            _y += ySpeed;
         }
         //quad3
         if(_x <= 200 && _y <= 400 && _y >= 200){
-            _x -= 1;
-            _y -= 1;
+            _x -= xSpeed;
+            _y -= ySpeed;
         }
         //quad4
         if(_y <= 200 && _x <= 200) {
-            _x += 1;
-            _y -= 1;
+            _x += xSpeed;
+            _y -= ySpeed;
         }
     }
 
