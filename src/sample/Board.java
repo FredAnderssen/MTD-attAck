@@ -2,9 +2,11 @@ package sample;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 
-public class Board extends JPanel implements Runnable{
+public class Board extends JPanel implements Runnable {
     private final int BOARD_WIDTH = 400;
     private final int BOARD_HEIGHT = 400;
     private final int INIT_X = 200;
@@ -21,6 +23,8 @@ public class Board extends JPanel implements Runnable{
     };
 
     private void initBoard(){
+        addKeyListener(new TAdapter());
+        setFocusable(true);
         setBackground(Color.BLACK);
         setSize(BOARD_WIDTH, BOARD_HEIGHT);
 
@@ -34,14 +38,12 @@ public class Board extends JPanel implements Runnable{
     @Override
     public void paintComponent(Graphics graphics) {
         super.paintComponent(graphics);
-
         paintBody(graphics);
-
     };
 
     private void paintBody(Graphics graphics){
         graphics.drawImage(body, _x, _y, this);
-        graphics.drawImage(spaceship.getImage(), 100, 100, this);
+        graphics.drawImage(spaceship.getImage(), spaceship.getX(), spaceship.getY(), this);
         Toolkit.getDefaultToolkit().sync();
     }
 
@@ -80,6 +82,25 @@ public class Board extends JPanel implements Runnable{
         }
     }
 
+    private void step() {
+        spaceship.move();
+
+        repaint(spaceship.getX()-1, spaceship.getY()-1,
+                spaceship.getWidth()+2, spaceship.getHeight()+2);
+    }
+
+    private class TAdapter extends KeyAdapter {
+        @Override
+        public void keyReleased(KeyEvent keyEvent) {
+            spaceship.keyReleased(keyEvent);
+        }
+
+        @Override
+        public void keyPressed(KeyEvent keyEvent) {
+            spaceship.keyPressed(keyEvent);
+        }
+    }
+
     @Override
     public void run() {
         long beforeTime, timeDifference, sleep;
@@ -89,6 +110,7 @@ public class Board extends JPanel implements Runnable{
 
             cycle();
             repaint();
+            step();
 
             timeDifference = System.currentTimeMillis() - beforeTime;
             sleep = DELAY - timeDifference;

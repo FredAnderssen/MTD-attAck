@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="object move in a romb path">
+    <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="have two images on same board">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/aTackProject/sample/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/aTackProject/sample/Board.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Board.java" afterDir="false" />
@@ -224,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1576372033807</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="have two images on same board">
+      <created>1576440417127</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1576440417127</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -250,6 +257,7 @@
     <MESSAGE value="add starland image in Board.class" />
     <MESSAGE value="add animation of image with thread" />
     <MESSAGE value="object move in a romb path" />
-    <option name="LAST_COMMIT_MESSAGE" value="object move in a romb path" />
+    <MESSAGE value="have two images on same board" />
+    <option name="LAST_COMMIT_MESSAGE" value="have two images on same board" />
   </component>
 </project>
